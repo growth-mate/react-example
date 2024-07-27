@@ -39,9 +39,9 @@ function App() {
 					</button>
 				</div>
 			</div>
-			<div className="your ad unit id here">
+			<div className="right">
 				<Ad
-					unitId="2"
+					unitId="your ad unit id here"
 					format="250x250"
 				/>
 			</div>
