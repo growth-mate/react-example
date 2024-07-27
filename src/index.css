@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
+* {
+	--gm-black: #080908;
+	--gm-white: #eceeec;
+	--gm-primary: #c2f0c2;
+	--gm-secondary: #8cb88c;
+
+	--gm-black-content: var(--gm-white);
+	--gm-white-content: var(--gm-black);
+	--gm-primary-content: var(--gm-black);
+	--gm-secondary-content: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#root {
+	font-family: "Sofia Sans";
+	background-color: #080908;
+	color: #eceeec;
+}
+
+html, 
+body {
+    display: flex;
+	height: 100%;
+	width: 100%;
+}
+
+#root {
+    flex: 1;
+	display: grid;
+    gap: 0 5rem;
+    padding: 1rem;
+	grid-template-columns: 1fr 80ch 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas: "left center right";
+}
+
+.main {
+	grid-area: center;
+	align-self: center;
+	margin: 1rem auto;
+}
+
+.left {
+	grid-area: left;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.right {
+	grid-area: right;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+}
+
+a {
+	font-family: "Source Code Pro";
+	color: var(--gm-primary);
+}
+
+a:visited {
+	color: var(--gm-secondary);
+}
+
+.connect-wallet {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 500px;
+    width: fit-content;
+    background-color: var(--gm-primary);
+    color: var(--gm-black);
+    padding: 4px 12px;
+    cursor: pointer;
+}
