@@ -31,7 +31,7 @@ const Ad: React.FC<IAd> = ({ unitId, format, accountId, className }) => {
 		script.addEventListener("load", () => window.growthmate.register(unitId));
 
 		return () => window.growthmate?.unregister(unitId);
-	}, []);
+	}, [unitId]);
 
 	return (
 		<a
