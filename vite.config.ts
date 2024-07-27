@@ -4,6 +4,6 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: "/react-example/",
+    base: "https://growth-mate.github.io/react-example/",
     plugins: [nodePolyfills(), react()],
 })
