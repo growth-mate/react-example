@@ -7,14 +7,16 @@ function App() {
 
 	return (
 		<>
+			<div className="top">
+				<Ad
+					unitId="1W7xUZDbrIAMhKseC6tSUA=="
+					format="Leaderboard"
+				/>
+			</div>
 			<div className="left">
 				<Ad
-					unitId="BADeTNAXK4MgyNsyJ1cZXQ=="
-					format="200x200"
-				/>
-				<Ad
-					unitId="your ad unit id here"
-					format="300x100"
+					unitId="OhHdiR6xO06CdOhrlnmr/A=="
+					format="Small Rectangle"
 				/>
 			</div>
 			<div className="main">
@@ -23,8 +25,8 @@ function App() {
 				</h1>
 				<div>
 					This is an example implementation of a GrowthMate ad unit. <br /> More info at{" "}
-					<a href="https://github.com/growth-mate/react-example/tree/main">
-						https://github.com/growth-mate/react-example
+					<a href="https://github.com/growth-mate/ad-widget/tree/main">
+						https://github.com/growth-mate/ad-widget
 					</a>
 					.<br />
 					<br />
@@ -41,12 +43,13 @@ function App() {
 			</div>
 			<div className="right">
 				<Ad
-					unitId="your ad unit id here"
-					format="250x250"
+					unitId="2"
+					format="Small Banner"
 				/>
 			</div>
 		</>
 	);
 }
+
 
 export default App;

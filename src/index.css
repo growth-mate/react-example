@@ -39,8 +39,11 @@ body {
     gap: 0 5rem;
     padding: 1rem;
 	grid-template-columns: 1fr 80ch 1fr;
-	grid-template-rows: 1fr;
-	grid-template-areas: "left center right";
+	grid-template-rows: 200px 1fr 200px;
+	grid-template-areas: 
+        "top top top"
+        "left center right"
+        "bottom bottom bottom";
 }
 
 .main {
@@ -65,6 +68,14 @@ body {
     align-items: flex-start;
     justify-content: center;
     gap: 1rem;
+}
+
+.top {
+    grid-area: top;
+}
+
+.bottom {
+    grid-area: bottom;
 }
 
 a {
