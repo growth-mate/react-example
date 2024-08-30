@@ -28,7 +28,7 @@ export const FeedPage: React.FC = () => {
 						{walletSelector && walletSelector?.accountId != null ? <p>Log Out</p> : <p>Connect Wallet</p>}
 					</button>
 				</div>
-				<Feed feedId="test" />
+				<Feed unitId="test" />
 			</div>
 		</>
 	);

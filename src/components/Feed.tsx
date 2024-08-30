@@ -1,40 +1,43 @@
-import React from "react";
-import { Ad } from "./Ad";
+import React, { useEffect } from "react";
+
+declare global {
+	interface Window {
+		growthmate: {
+			register: (unitId: string) => void;
+			unregister: (unitId: string) => void;
+		};
+	}
+}
 
 interface IFeed {
-	feedId: string;
+	unitId: string;
 	accountId?: string;
 	className?: string;
 }
 
-const Feed: React.FC<IFeed> = ({ feedId, accountId, className }) => {
+const Feed: React.FC<IFeed> = ({ unitId, accountId, className }) => {
+	useEffect(() => {
+		if (window.growthmate !== undefined) window.growthmate.register(unitId);
+
+		let script: HTMLScriptElement | null = document.querySelector("#gm-script");
+		if (!script) {
+			script = document.createElement("script");
+			script.src = "http://127.0.0.1:8080/feed-manager.react.js";
+			script.id = "gm-script";
+			document.head.appendChild(script);
+		}
+
+		script.addEventListener("load", () => window.growthmate.register(unitId));
+
+		return () => window.growthmate?.unregister(unitId);
+	}, [unitId]);
+
 	return (
 		<div
 			className={`gm-feed ${className ?? ""}`}
-			data-gm-id={feedId}
+			data-gm-id={unitId}
 			data-gm-account-id={accountId ?? null}
-		>
-			<Ad
-				unitId="6JdSUkpf0AGTaAQYxb8Mkw=="
-				format="Small Rectangle"
-			/>
-			<Ad
-				unitId="hcxNjzZU73mPl1NkoljMPQ=="
-				format="Small Rectangle"
-			/>
-			<Ad
-				unitId="86Dsfjrb7qFVMKre01qYCw=="
-				format="Small Rectangle"
-			/>
-			<Ad
-				unitId="gPvY0MlKT/r7zyafMIfuDA=="
-				format="Small Rectangle"
-			/>
-			<Ad
-				unitId="0HrBew0MqfzQEQioktav8g=="
-				format="Small Rectangle"
-			/>
-		</div>
+		></div>
 	);
 };
 

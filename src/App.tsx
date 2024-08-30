@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { AdPage, FeedPage } from "./routes";
 
 const App = () => (
@@ -10,6 +10,16 @@ const App = () => (
 		<Route
 			path="react-example/feeds"
 			element={<FeedPage />}
+		/>
+		<Route
+			index
+			path="react-example/*"
+			element={
+				<Navigate
+					to="/react-example/feeds"
+					replace
+				/>
+			}
 		/>
 	</Routes>
 );
