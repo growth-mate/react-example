@@ -26,7 +26,7 @@ export const FeedPage: React.FC = () => {
 				>
 					{walletSelector && walletSelector?.accountId != null ? <p>Log Out</p> : <p>Connect Wallet</p>}
 				</button>
-				<Feed unitId="56kI7qxIQM34KtqlHpYnGg==" />
+				<Feed unitId="YXegR/6lNM1JZVCpKyCFkg==" />
 				<div style={{ marginTop: "auto", opacity: 0.3 }}>
 					This is an example implementation of a GrowthMate feed. <br /> More info at{" "}
 					<a href="https://github.com/growth-mate/react-example/tree/main">
@@ -43,7 +43,7 @@ export const FeedPage: React.FC = () => {
 				className="left"
 				style={walletSelector && walletSelector?.accountId != null ? {} : { filter: "blur(10px)" }}
 			>
-				<Feed unitId="56kI7qxIQM34KtqlHpYnGg==" />
+				<Feed unitId="YXegR/6lNM1JZVCpKyCFkg==" />
 			</div>
 			<div className="right">
 				<h1>
