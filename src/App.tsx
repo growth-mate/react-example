@@ -4,19 +4,19 @@ import { AdPage, FeedPage } from "./routes";
 const App = () => (
 	<Routes>
 		<Route
-			path="react-example/ads"
+			path="/ads"
 			element={<AdPage />}
 		/>
 		<Route
-			path="react-example/feeds"
+			path="/feeds"
 			element={<FeedPage />}
 		/>
 		<Route
 			index
-			path="react-example/*"
+			path="*"
 			element={
 				<Navigate
-					to="/react-example/feeds"
+					to="/feeds"
 					replace
 				/>
 			}
