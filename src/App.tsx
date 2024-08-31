@@ -4,11 +4,11 @@ import { AdPage, FeedPage } from "./routes";
 const App = () => (
 	<Routes>
 		<Route
-			path="ads"
+			path="/ads"
 			element={<AdPage />}
 		/>
 		<Route
-			path="feeds"
+			path="/feeds"
 			element={<FeedPage />}
 		/>
 		<Route
