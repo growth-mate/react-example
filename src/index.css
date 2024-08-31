@@ -33,61 +33,6 @@ body {
 	width: 100%;
 }
 
-#root {
-    flex: 1;
-}
-
-@media (min-width: 768px) {
-    #root {
-        display: grid;
-        gap: 0 5rem;
-        padding: 1rem;
-        /* grid-template-rows: 200px 1fr 200px; */
-        /* grid-template-areas: 
-            "top top top"
-            "left center right"
-            "bottom bottom bottom"; */
-        height: 100%;
-        grid-template-areas: "left center right";
-        grid-template-columns: 1fr 60ch 1fr;
-    }
-}
-
-.main {
-	grid-area: center;
-	align-self: center;
-	margin: 1rem auto;
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 15px;
-}
-
-.left {
-	grid-area: left;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.right {
-	grid-area: right;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.top {
-    grid-area: top;
-}
-
-.bottom {
-    grid-area: bottom;
-}
-
 a {
 	font-family: "Source Code Pro";
 	color: var(--gm-primary);
@@ -95,31 +40,4 @@ a {
 
 a:visited {
 	color: var(--gm-secondary);
-}
-
-.connect-wallet {
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    overflow: visible;
-
-    display: flex;
-    flex-flow: row nowrap;
-    border-radius: 500px;
-    width: fit-content;
-    background-color: var(--gm-primary);
-    color: var(--gm-black);
-    padding: 4px 12px;
-    cursor: pointer;
-}
-
-.gm-feed {
-    gap: 15px;
-    height: 400px;
-    border-radius: 24px;
-}
-
-.gm-feed > .gm-post {
-    border-radius: 24px;
 }

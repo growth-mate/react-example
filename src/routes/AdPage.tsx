@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { WalletSelectorContext } from "../utils/wallet";
 import { Ad } from "../components/Ad";
+import "./AdPage.css";
 
 export const AdPage: React.FC = () => {
 	const walletSelector = useContext(WalletSelectorContext);

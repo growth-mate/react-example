@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { WalletSelectorContext } from "../utils/wallet";
 import { Feed } from "../components";
+import "./FeedPage.css";
 
 export const FeedPage: React.FC = () => {
 	const walletSelector = useContext(WalletSelectorContext);
@@ -25,10 +26,7 @@ export const FeedPage: React.FC = () => {
 				>
 					{walletSelector && walletSelector?.accountId != null ? <p>Log Out</p> : <p>Connect Wallet</p>}
 				</button>
-
-				<div className="left">
-					<Feed unitId="56kI7qxIQM34KtqlHpYnGg==" />
-				</div>
+				<Feed unitId="56kI7qxIQM34KtqlHpYnGg==" />
 				<div style={{ marginTop: "auto", opacity: 0.3 }}>
 					This is an example implementation of a GrowthMate feed. <br /> More info at{" "}
 					<a href="https://github.com/growth-mate/react-example/tree/main">
@@ -41,13 +39,13 @@ export const FeedPage: React.FC = () => {
 
 	return (
 		<>
-			<div className="left">
+			<div
+				className="left"
+				style={walletSelector && walletSelector?.accountId != null ? {} : { filter: "blur(10px)" }}
+			>
 				<Feed unitId="56kI7qxIQM34KtqlHpYnGg==" />
 			</div>
-			<div
-				className="main"
-				style={{ height: 350, paddingTop: 50 }}
-			>
+			<div className="right">
 				<h1>
 					{walletSelector && walletSelector?.accountId != null ? `GM, ${walletSelector!.accountId}!` : "GM!"}
 				</h1>
@@ -71,9 +69,6 @@ export const FeedPage: React.FC = () => {
 					</a>
 					.<br />
 				</div>
-			</div>
-			<div className="right">
-				<Feed unitId="BpQ1FqdowtXqsQfzTQxXLA==" />
 			</div>
 		</>
 	);
