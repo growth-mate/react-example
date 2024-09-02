@@ -5,6 +5,7 @@ import { Feed } from "../components";
 import "./FeedPage.css";
 
 export const FeedPage: React.FC = () => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [searchParams, _] = useSearchParams();
 	const walletSelector = useContext(WalletSelectorContext);
 	const isMobile = window.innerWidth <= 768;
