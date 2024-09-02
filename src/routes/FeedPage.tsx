@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { WalletSelectorContext } from "../utils/wallet";
+import { useSearchParams } from "react-router-dom";
 import { Feed } from "../components";
 import "./FeedPage.css";
 
 export const FeedPage: React.FC = () => {
+	const [searchParams, _] = useSearchParams();
 	const walletSelector = useContext(WalletSelectorContext);
 	const isMobile = window.innerWidth <= 768;
 
@@ -11,12 +13,11 @@ export const FeedPage: React.FC = () => {
 		return (
 			<div style={{ margin: "1rem auto", display: "flex", flexFlow: "column nowrap", gap: 15, width: 300 }}>
 				<h1>
-					{walletSelector && walletSelector?.accountId != null ? `GM, ${walletSelector!.accountId}!` : "GM!"}
+					{walletSelector && walletSelector?.accountId != null
+						? `GM, ${walletSelector!.accountId}!`
+						: "Curated Actions for You"}
 				</h1>
-				<div>
-					The <i>easiest way</i> to engage on NEAR. Log in with your wallet to discover actions curated for
-					you.
-				</div>
+				<div>Login with your wallet to access a personalized feed tailored to your transaction history.</div>
 				<button
 					className="connect-wallet"
 					onClick={async () => {
@@ -26,7 +27,15 @@ export const FeedPage: React.FC = () => {
 				>
 					{walletSelector && walletSelector?.accountId != null ? <p>Log Out</p> : <p>Connect Wallet</p>}
 				</button>
-				<Feed unitId="YXegR/6lNM1JZVCpKyCFkg==" />
+				<div
+					style={
+						searchParams.has("unblur") || (walletSelector && walletSelector?.accountId != null)
+							? {}
+							: { filter: "blur(10px)" }
+					}
+				>
+					<Feed unitId="YXegR/6lNM1JZVCpKyCFkg==" />
+				</div>
 				<div style={{ marginTop: "auto", opacity: 0.3 }}>
 					This is an example implementation of a GrowthMate feed. <br /> More info at{" "}
 					<a href="https://github.com/growth-mate/react-example/tree/main">
@@ -41,18 +50,21 @@ export const FeedPage: React.FC = () => {
 		<>
 			<div
 				className="left"
-				style={walletSelector && walletSelector?.accountId != null ? {} : { filter: "blur(10px)" }}
+				style={
+					searchParams.has("unblur") || (walletSelector && walletSelector?.accountId != null)
+						? {}
+						: { filter: "blur(10px)" }
+				}
 			>
 				<Feed unitId="YXegR/6lNM1JZVCpKyCFkg==" />
 			</div>
 			<div className="right">
 				<h1>
-					{walletSelector && walletSelector?.accountId != null ? `GM, ${walletSelector!.accountId}!` : "GM!"}
+					{walletSelector && walletSelector?.accountId != null
+						? `GM, ${walletSelector!.accountId}!`
+						: "Curated Actions for You"}
 				</h1>
-				<div>
-					The <i>easiest way</i> to engage on NEAR. Log in with your wallet to discover actions curated for
-					you.
-				</div>
+				<div>Login with your wallet to access a personalized feed tailored to your transaction history.</div>
 				<button
 					className="connect-wallet"
 					onClick={async () => {
