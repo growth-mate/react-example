@@ -1,13 +1,13 @@
 #root {
-    flex: 1;
-    display: grid;
-    gap: 0 5rem;
-    padding: 1rem;
-    grid-template-rows: 200px 1fr 200px;
-    grid-template-areas:
-        "top top top"
-        "left center right"
-        "bottom bottom bottom";
+	flex: 1;
+	display: grid;
+	gap: 0 5rem;
+	padding: 1rem;
+	grid-template-rows: 200px 1fr 200px;
+	grid-template-areas:
+		"top top top"
+		"left center right"
+		"bottom bottom bottom";
 }
 
 .main {
@@ -18,43 +18,43 @@
 
 .left {
 	grid-area: left;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 1rem;
+	display: flex;
+	flex-flow: column;
+	align-items: flex-end;
+	justify-content: center;
+	gap: 1rem;
 }
 
 .right {
 	grid-area: right;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 1rem;
+	display: flex;
+	flex-flow: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 1rem;
 }
 
 .top {
-    grid-area: top;
+	grid-area: top;
 }
 
 .bottom {
-    grid-area: bottom;
+	grid-area: bottom;
 }
 
 .connect-wallet {
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    overflow: visible;
+	border: none;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	overflow: visible;
 
-    display: flex;
-    flex-flow: row nowrap;
-    border-radius: 500px;
-    width: fit-content;
-    background-color: var(--gm-primary);
-    color: var(--gm-black);
-    padding: 4px 12px;
-    cursor: pointer;
+	display: flex;
+	flex-flow: row nowrap;
+	border-radius: 500px;
+	width: fit-content;
+	background-color: var(--gm-primary);
+	color: var(--gm-black);
+	padding: 4px 12px;
+	cursor: pointer;
 }
