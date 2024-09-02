@@ -94,12 +94,17 @@
 }
 
 .gm-feed {
-	max-width: 615px;
-	min-width: 300px;
-	gap: 15px;
-	border-radius: 24px;
-	flex-flow: row wrap !important;
-	margin: 1rem 0;
+    max-width: 615px;
+    min-width: 300px;
+    gap: 15px;
+    border-radius: 24px;
+    flex-flow: row wrap !important;
+    margin: 1rem 0;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.gm-feed::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .gm-feed > .gm-post {

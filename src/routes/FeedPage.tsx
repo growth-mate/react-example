@@ -15,9 +15,12 @@ export const FeedPage: React.FC = () => {
 				<h1>
 					{walletSelector && walletSelector?.accountId != null
 						? `GM, ${walletSelector!.accountId}!`
-						: "Curated Actions for You"}
+						: "NEAR Activities, Just for You!"}
 				</h1>
-				<div>Login with your wallet to access a personalized feed tailored to your transaction history.</div>
+				<div>
+					Discover the latest offers and news in your ecosystem based on your transaction history. Log in now
+					and stay up to date! 🚀
+				</div>
 				<button
 					className="connect-wallet"
 					onClick={async () => {
@@ -62,9 +65,12 @@ export const FeedPage: React.FC = () => {
 				<h1>
 					{walletSelector && walletSelector?.accountId != null
 						? `GM, ${walletSelector!.accountId}!`
-						: "Curated Actions for You"}
+						: "NEAR Activities, Just for You!"}
 				</h1>
-				<div>Login with your wallet to access a personalized feed tailored to your transaction history.</div>
+				<div>
+					Discover the latest offers and news in your ecosystem based on your transaction history. Log in now
+					and stay up to date! 🚀
+				</div>
 				<button
 					className="connect-wallet"
 					onClick={async () => {
