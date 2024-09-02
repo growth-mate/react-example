@@ -13,11 +13,11 @@ export const FeedPage: React.FC = () => {
 	if (isMobile)
 		return (
 			<div style={{ margin: "1rem auto", display: "flex", flexFlow: "column nowrap", gap: 15, width: 300 }}>
-				<h1>
+				<h2>
 					{walletSelector && walletSelector?.accountId != null
 						? `GM, ${walletSelector!.accountId}!`
 						: "Curated Actions for You"}
-				</h1>
+				</h2>
 				<div>
 					Discover the latest offers and news in your ecosystem based on your transaction history. Log in now
 					and stay up to date! 🚀
@@ -63,11 +63,11 @@ export const FeedPage: React.FC = () => {
 				<Feed unitId="YXegR/6lNM1JZVCpKyCFkg==" />
 			</div>
 			<div className="right">
-				<h1>
+				<h2>
 					{walletSelector && walletSelector?.accountId != null
 						? `GM, ${walletSelector!.accountId}!`
 						: "Curated Actions for You"}
-				</h1>
+				</h2>
 				<div>
 					Discover the latest offers and news in your ecosystem based on your transaction history. Log in now
 					and stay up to date! 🚀
