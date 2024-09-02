@@ -16,7 +16,7 @@ export const FeedPage: React.FC = () => {
 				<h1>
 					{walletSelector && walletSelector?.accountId != null
 						? `GM, ${walletSelector!.accountId}!`
-						: "NEAR Activities, Just for You!"}
+						: "Curated Actions for You"}
 				</h1>
 				<div>
 					Discover the latest offers and news in your ecosystem based on your transaction history. Log in now
@@ -66,7 +66,7 @@ export const FeedPage: React.FC = () => {
 				<h1>
 					{walletSelector && walletSelector?.accountId != null
 						? `GM, ${walletSelector!.accountId}!`
-						: "NEAR Activities, Just for You!"}
+						: "Curated Actions for You"}
 				</h1>
 				<div>
 					Discover the latest offers and news in your ecosystem based on your transaction history. Log in now
