@@ -7,6 +7,7 @@ import { setupModal } from "@near-wallet-selector/modal-ui";
 import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupSender } from "@near-wallet-selector/sender";
 import { setupBitteWallet } from "@near-wallet-selector/bitte-wallet";
+import { setupNearMobileWallet } from "@near-wallet-selector/near-mobile-wallet";
 
 import type { ReactNode } from "react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
@@ -50,7 +51,14 @@ const WalletSelectorContextProvider: React.FC<{
 				networkId: window.NEAR_ENV,
 				nodeUrl: window.nearConfig.nodeUrl,
 			} as Network,
-			modules: [setupMyNearWallet(), setupSender(), setupHereWallet(), setupMeteorWallet(), setupBitteWallet()],
+			modules: [
+				setupMyNearWallet(),
+				setupSender(),
+				setupHereWallet(),
+				setupMeteorWallet(),
+				setupBitteWallet(),
+				setupNearMobileWallet(),
+			],
 		});
 		const _modal = setupModal(_selector, {
 			contractId: window.nearConfig.GROWTHMATE_ADDRESS,
