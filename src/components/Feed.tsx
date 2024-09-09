@@ -22,7 +22,7 @@ const Feed: React.FC<IFeed> = ({ unitId, accountId, className }) => {
 		let script: HTMLScriptElement | null = document.querySelector("#gm-script");
 		if (!script) {
 			script = document.createElement("script");
-			script.src = "https://cdn.growthmate.xyz/feed-manager.react.js";
+			script.src = "https://cdn.growthmate.xyz/scripts/feed-manager.react.js";
 			script.id = "gm-script";
 			document.head.appendChild(script);
 		}
