@@ -6,6 +6,12 @@
     align-items: center;
 }
 
+h2 {
+    max-width: min(calc(100vw - 4rem), 30ch);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .flex-row {
     display: flex;
 	flex-flow: row nowrap;

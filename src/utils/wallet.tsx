@@ -8,7 +8,6 @@ import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupSender } from "@near-wallet-selector/sender";
 import { setupBitteWallet } from "@near-wallet-selector/bitte-wallet";
 import { setupNearMobileWallet } from "@near-wallet-selector/near-mobile-wallet";
-import { setupNightly } from "@near-wallet-selector/nightly";
 
 import type { ReactNode } from "react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
@@ -59,7 +58,6 @@ const WalletSelectorContextProvider: React.FC<{
 				setupMeteorWallet(),
 				setupBitteWallet(),
 				setupNearMobileWallet(),
-				setupNightly(),
 			],
 		});
 		const _modal = setupModal(_selector, {
