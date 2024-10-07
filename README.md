@@ -2,7 +2,7 @@
 
 ###### React + Typescript + wallet-selector
 
-Dead simple [example integration](https://growth-mate.github.io/react-example/) of GrowthMate ad units.
+Dead simple [example integration](https://demo.growthmate.xyz/#/ads) of GrowthMate ad units.
 
 This repository contains boilerplate code of a vite react-typescript app, plus the default implementation of wallet-selector.
 Adding our ad units to it straightforward:
