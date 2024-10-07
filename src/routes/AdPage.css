@@ -1,22 +1,21 @@
-#root {
+.ad-page {
 	flex: 1;
 	display: grid;
-	gap: 0 5rem;
-	padding: 1rem;
-	grid-template-rows: 200px 1fr 200px;
+	gap: 2.5rem;
+	padding: 2.5rem;
+	grid-template-columns: minmax(300px, 450px) 1fr;
 	grid-template-areas:
-		"top top top"
-		"left center right"
-		"bottom bottom bottom";
+		"top top"
+		"left center"
 }
 
-.main {
+.ad-main {
 	grid-area: center;
 	align-self: center;
-	margin: 1rem auto;
+	min-width: 300px;
 }
 
-.left {
+.ad-left {
 	grid-area: left;
 	display: flex;
 	flex-flow: column;
@@ -25,21 +24,8 @@
 	gap: 1rem;
 }
 
-.right {
-	grid-area: right;
-	display: flex;
-	flex-flow: column;
-	align-items: flex-start;
-	justify-content: center;
-	gap: 1rem;
-}
-
-.top {
+.ad-top {
 	grid-area: top;
-}
-
-.bottom {
-	grid-area: bottom;
 }
 
 .connect-wallet {
@@ -57,4 +43,28 @@
 	color: var(--gm-black);
 	padding: 4px 12px;
 	cursor: pointer;
+}
+
+.gm-ad-unit {
+	border-radius: 24px;
+}
+
+@media (max-width: 720px) {
+	.ad-page {
+		display: flex;
+		flex-flow: column-reverse nowrap;
+		padding: 1rem;
+		gap: 1rem;
+	}
+
+	.ad-left, .ad-top {
+		align-items: flex-start;
+		max-width: 100%;
+		overflow: scroll;
+	}
+
+	.ad-main {
+		min-width: unset;
+		margin-right: auto;
+	}
 }

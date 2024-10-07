@@ -1,4 +1,4 @@
-#root {
+.feed-page {
 	padding: 1rem 1rem;
     position: relative;
     display: flex;
@@ -32,6 +32,9 @@ h2 {
     flex: 0 1 40ch;
     min-width: 30ch;
     align-self: flex-start;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.5rem;
 }
 
 .left {
@@ -49,7 +52,7 @@ h2 {
 }
 
 @media (min-width: 768px) {
-	#root {
+	.feed-page {
 		gap: 0 5rem;
 		padding: 1rem 5rem;
 	}

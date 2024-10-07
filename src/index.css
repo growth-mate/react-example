@@ -24,6 +24,8 @@ body,
 	font-family: "Sofia Sans";
 	background-color: #080908;
 	color: #eceeec;
+	min-width: 100%;
+	min-height: 100vh;
 }
 
 html,

@@ -7,20 +7,20 @@ export const AdPage: React.FC = () => {
 	const walletSelector = useContext(WalletSelectorContext);
 
 	return (
-		<>
-			<div className="top">
+		<div className="ad-page">
+			<div className="ad-top">
 				<Ad
 					unitId="1W7xUZDbrIAMhKseC6tSUA=="
 					format="Leaderboard"
 				/>
 			</div>
-			<div className="left">
+			<div className="ad-left">
 				<Ad
 					unitId="OhHdiR6xO06CdOhrlnmr/A=="
 					format="Small Rectangle"
 				/>
 			</div>
-			<div className="main">
+			<div className="ad-main">
 				<h1>
 					{walletSelector && walletSelector?.accountId != null ? `GM, ${walletSelector!.accountId}!` : "GM!"}
 				</h1>
@@ -42,12 +42,6 @@ export const AdPage: React.FC = () => {
 					</button>
 				</div>
 			</div>
-			<div className="right">
-				<Ad
-					unitId="2"
-					format="Small Banner"
-				/>
-			</div>
-		</>
+		</div>
 	);
 };
