@@ -30,7 +30,7 @@ const Feed: React.FC<IFeed> = ({ unitId, accountId, className }) => {
 		script.addEventListener("load", () => window.growthmate.register(unitId));
 
 		return () => window.growthmate?.unregister(unitId);
-	}, [unitId]);
+	}, [unitId, accountId]);
 
 	return (
 		<div

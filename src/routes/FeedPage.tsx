@@ -74,7 +74,10 @@ export const FeedPage: React.FC = () => {
 								: { filter: "blur(10px)" }
 						}
 					>
-						<Feed unitId="YXegR/6lNM1JZVCpKyCFkg==" />
+						<Feed
+							accountId={accountId ?? undefined}
+							unitId="YXegR/6lNM1JZVCpKyCFkg=="
+						/>
 					</div>
 					<div className="right">
 						<h2>
