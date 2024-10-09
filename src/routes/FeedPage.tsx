@@ -60,10 +60,11 @@ export const FeedPage: React.FC = () => {
 								{selectedEcosystem.name == "Near" ? (
 									<div>
 										<input
-											className="ecosystem-selector-input-disabled"
+											className="ecosystem-selector-input"
 											type="text"
-											disabled={true}
-											placeholder="Enter your Wallet Address"
+											// className="ecosystem-selector-input-disabled" in case of deactivation to allow only wallet connection
+											// disabled={true}
+											placeholder="Enter your Wallet Address or connect with your wallet."
 											onChange={(e) => setInputAccountId(e.target.value)}
 										/>
 										<button
@@ -74,10 +75,16 @@ export const FeedPage: React.FC = () => {
 												else walletSelector!.modal.show();
 											}}
 										>
-											{walletSelector && walletSelector?.accountId != null ? (
-												<p>Log Out</p>
+											{inputAccountId.length == 0 ? (
+												<>
+													{walletSelector && walletSelector?.accountId != null ? (
+														<p>Log Out</p>
+													) : (
+														<p>Connect Wallet</p>
+													)}
+												</>
 											) : (
-												<p>Connect Wallet</p>
+												<p>Load Feed</p>
 											)}
 										</button>
 									</div>
@@ -196,10 +203,16 @@ export const FeedPage: React.FC = () => {
 											else walletSelector!.modal.show();
 										}}
 									>
-										{walletSelector && walletSelector?.accountId != null ? (
-											<p>Log Out</p>
+										{inputAccountId.length == 0 ? (
+											<>
+												{walletSelector && walletSelector?.accountId != null ? (
+													<p>Log Out</p>
+												) : (
+													<p>Connect Wallet</p>
+												)}
+											</>
 										) : (
-											<p>Connect Wallet</p>
+											<p>Load Feed</p>
 										)}
 									</button>
 								) : (
