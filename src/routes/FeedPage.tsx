@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { WalletSelectorContext } from "../utils/wallet";
 import { useSearchParams } from "react-router-dom";
 import { Feed } from "../components";
 import "./FeedPage.css";
-import { Ecosystem, Ecosystems, truncateAccountId } from "../utils/ecosystem";
+import { Ecosystem, Ecosystems, truncateAccountDisplay } from "../utils/ecosystem";
 
 export const FeedPage: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -14,6 +14,12 @@ export const FeedPage: React.FC = () => {
 	const [accountId, setAccountId] = useState<string | null>(null);
 	const [inputAccountId, setInputAccountId] = useState<string>("");
 
+	useEffect(() => {
+		if (walletSelector && walletSelector.accountId != null) {
+			setAccountId(walletSelector.accountId);
+		}
+	}, [walletSelector]);
+
 	if (isMobile)
 		return (
 			<div className="feed-page">
@@ -21,7 +27,11 @@ export const FeedPage: React.FC = () => {
 					<br />
 					<h2>
 						{accountId != null
-							? `GM, ${accountId.length > 10 ? truncateAccountId(accountId) : accountId}!`
+							? `GM, ${
+									accountId.length > 10
+										? truncateAccountDisplay(accountId, selectedEcosystem.name)
+										: accountId
+							  }!`
 							: "Curated Actions for You"}
 					</h2>
 					<div>
@@ -36,8 +46,12 @@ export const FeedPage: React.FC = () => {
 							<select
 								id="ecosystem-select"
 								aria-label="Select your Ecosystem"
-								onChange={(e) => {
-									if (e.target.value == "Near") {
+								onChange={async (e) => {
+									// logout of near wallet if selector has accountId
+									if (walletSelector && walletSelector?.accountId != null) {
+										(await walletSelector!.selector.wallet()).signOut();
+									}
+									if (e.target.value != selectedEcosystem.name) {
 										setAccountId(null);
 									}
 									return setSelectedEcosystem(
@@ -67,26 +81,34 @@ export const FeedPage: React.FC = () => {
 											placeholder="Enter wallet address or connect"
 											onChange={(e) => setInputAccountId(e.target.value)}
 										/>
-										<button
-											className="connect-wallet"
-											onClick={async () => {
-												if (walletSelector?.accountId != null)
-													(await walletSelector!.selector.wallet()).signOut();
-												else walletSelector!.modal.show();
-											}}
-										>
-											{inputAccountId.length == 0 ? (
-												<>
-													{walletSelector && walletSelector?.accountId != null ? (
-														<p>Log Out</p>
-													) : (
-														<p>Connect Wallet</p>
-													)}
-												</>
-											) : (
-												<p>Load Feed</p>
-											)}
-										</button>
+										{inputAccountId.length == 0 ? (
+											<button
+												className="connect-wallet"
+												onClick={async () => {
+													if (walletSelector?.accountId != null)
+														(await walletSelector!.selector.wallet()).signOut();
+													else walletSelector!.modal.show();
+												}}
+											>
+												{walletSelector && walletSelector?.accountId != null ? (
+													<p>Log Out</p>
+												) : (
+													<p>Connect Wallet</p>
+												)}
+											</button>
+										) : (
+											<button
+												className="connect-wallet"
+												onClick={() => {
+													setAccountId(inputAccountId);
+													if (inputAccountId.length == 0) {
+														setAccountId(null);
+													}
+												}}
+											>
+												Load Feed
+											</button>
+										)}
 									</div>
 								) : (
 									<div>
@@ -123,7 +145,11 @@ export const FeedPage: React.FC = () => {
 								: { filter: "blur(10px)" }
 						}
 					>
-						<Feed unitId="YXegR/6lNM1JZVCpKyCFkg==" />
+						<Feed
+							unitId="YXegR/6lNM1JZVCpKyCFkg=="
+							networkName={selectedEcosystem.name}
+							accountId={accountId ?? undefined}
+						/>
 					</div>
 					<div style={{ marginTop: "auto", opacity: 0.3 }}>
 						This is an example implementation of a GrowthMate feed. <br /> More info at{" "}
@@ -152,14 +178,19 @@ export const FeedPage: React.FC = () => {
 						}
 					>
 						<Feed
-							accountId={accountId ?? undefined}
 							unitId="YXegR/6lNM1JZVCpKyCFkg=="
+							networkName={selectedEcosystem.name}
+							accountId={accountId ?? undefined}
 						/>
 					</div>
 					<div className="right">
 						<h2>
 							{accountId != null
-								? `GM, ${accountId.length > 10 ? truncateAccountId(accountId) : accountId}!`
+								? `GM, ${
+										accountId.length > 10
+											? truncateAccountDisplay(accountId, selectedEcosystem.name)
+											: accountId
+								  }!`
 								: "Curated Actions for You"}
 						</h2>
 						<div>
@@ -174,8 +205,12 @@ export const FeedPage: React.FC = () => {
 								<select
 									id="ecosystem-select"
 									aria-label="Select your Ecosystem"
-									onChange={(e) => {
-										if (e.target.value == "Near") {
+									onChange={async (e) => {
+										// logout of near wallet if selector has accountId
+										if (walletSelector && walletSelector?.accountId != null) {
+											(await walletSelector!.selector.wallet()).signOut();
+										}
+										if (e.target.value != selectedEcosystem.name) {
 											setAccountId(null);
 										}
 										return setSelectedEcosystem(
@@ -203,26 +238,34 @@ export const FeedPage: React.FC = () => {
 												placeholder="Enter wallet address or connect"
 												onChange={(e) => setInputAccountId(e.target.value)}
 											/>
-											<button
-												className="connect-wallet"
-												onClick={async () => {
-													if (walletSelector?.accountId != null)
-														(await walletSelector!.selector.wallet()).signOut();
-													else walletSelector!.modal.show();
-												}}
-											>
-												{inputAccountId.length == 0 ? (
-													<>
-														{walletSelector && walletSelector?.accountId != null ? (
-															<p>Log Out</p>
-														) : (
-															<p>Connect Wallet</p>
-														)}
-													</>
-												) : (
-													<p>Load Feed</p>
-												)}
-											</button>
+											{inputAccountId.length == 0 ? (
+												<button
+													className="connect-wallet"
+													onClick={async () => {
+														if (walletSelector?.accountId != null)
+															(await walletSelector!.selector.wallet()).signOut();
+														else walletSelector!.modal.show();
+													}}
+												>
+													{walletSelector && walletSelector?.accountId != null ? (
+														<p>Log Out</p>
+													) : (
+														<p>Connect Wallet</p>
+													)}
+												</button>
+											) : (
+												<button
+													className="connect-wallet"
+													onClick={() => {
+														setAccountId(inputAccountId);
+														if (inputAccountId.length == 0) {
+															setAccountId(null);
+														}
+													}}
+												>
+													Load Feed
+												</button>
+											)}
 										</div>
 									) : (
 										<div>

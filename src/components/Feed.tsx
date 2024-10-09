@@ -13,9 +13,10 @@ interface IFeed {
 	unitId: string;
 	accountId?: string;
 	className?: string;
+	networkName?: string;
 }
 
-const Feed: React.FC<IFeed> = ({ unitId, accountId, className }) => {
+const Feed: React.FC<IFeed> = ({ unitId, accountId, className, networkName }) => {
 	useEffect(() => {
 		if (window.growthmate !== undefined) window.growthmate.register(unitId);
 
@@ -37,6 +38,7 @@ const Feed: React.FC<IFeed> = ({ unitId, accountId, className }) => {
 			className={`gm-feed ${className ?? ""}`}
 			data-gm-id={unitId}
 			data-gm-account-id={accountId ?? null}
+			data-gm-network-name={networkName ?? null}
 		>
 			<a className="gm-post--ghost" />
 			<a className="gm-post--ghost" />
