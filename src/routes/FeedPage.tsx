@@ -64,7 +64,7 @@ export const FeedPage: React.FC = () => {
 											type="text"
 											// className="ecosystem-selector-input-disabled" in case of deactivation to allow only wallet connection
 											// disabled={true}
-											placeholder="Enter your Wallet Address or connect with your wallet."
+											placeholder="Enter wallet address or connect"
 											onChange={(e) => setInputAccountId(e.target.value)}
 										/>
 										<button
@@ -194,49 +194,58 @@ export const FeedPage: React.FC = () => {
 								</select>
 							</div>
 							<div>
-								{selectedEcosystem.name == "Near" ? (
-									<button
-										className="connect-wallet"
-										onClick={async () => {
-											if (walletSelector?.accountId != null)
-												(await walletSelector!.selector.wallet()).signOut();
-											else walletSelector!.modal.show();
-										}}
-									>
-										{inputAccountId.length == 0 ? (
-											<>
-												{walletSelector && walletSelector?.accountId != null ? (
-													<p>Log Out</p>
+								<div className="ecosystem-selector">
+									{selectedEcosystem.name == "Near" ? (
+										<div>
+											<input
+												className="ecosystem-selector-input"
+												type="text"
+												placeholder="Enter wallet address or connect"
+												onChange={(e) => setInputAccountId(e.target.value)}
+											/>
+											<button
+												className="connect-wallet"
+												onClick={async () => {
+													if (walletSelector?.accountId != null)
+														(await walletSelector!.selector.wallet()).signOut();
+													else walletSelector!.modal.show();
+												}}
+											>
+												{inputAccountId.length == 0 ? (
+													<>
+														{walletSelector && walletSelector?.accountId != null ? (
+															<p>Log Out</p>
+														) : (
+															<p>Connect Wallet</p>
+														)}
+													</>
 												) : (
-													<p>Connect Wallet</p>
+													<p>Load Feed</p>
 												)}
-											</>
-										) : (
-											<p>Load Feed</p>
-										)}
-									</button>
-								) : (
-									<div className="ecosystem-selector">
-										<input
-											className="ecosystem-selector-input"
-											type="text"
-											disabled={selectedEcosystem.name == "Near"}
-											placeholder="Enter your Wallet Address"
-											onChange={(e) => setInputAccountId(e.target.value)}
-										/>
-										<button
-											className="connect-wallet"
-											onClick={() => {
-												setAccountId(inputAccountId);
-												if (inputAccountId.length == 0) {
-													setAccountId(null);
-												}
-											}}
-										>
-											Load Feed
-										</button>
-									</div>
-								)}
+											</button>
+										</div>
+									) : (
+										<div>
+											<input
+												className="ecosystem-selector-input"
+												type="text"
+												placeholder="Enter your Wallet Address"
+												onChange={(e) => setInputAccountId(e.target.value)}
+											/>
+											<button
+												className="connect-wallet"
+												onClick={() => {
+													setAccountId(inputAccountId);
+													if (inputAccountId.length == 0) {
+														setAccountId(null);
+													}
+												}}
+											>
+												Load Feed
+											</button>
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
