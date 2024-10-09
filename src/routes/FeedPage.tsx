@@ -147,7 +147,7 @@ export const FeedPage: React.FC = () => {
 					>
 						<Feed
 							unitId="YXegR/6lNM1JZVCpKyCFkg=="
-							networkName={selectedEcosystem.name}
+							ecosystemName={selectedEcosystem.name}
 							accountId={accountId ?? undefined}
 						/>
 					</div>
@@ -179,7 +179,7 @@ export const FeedPage: React.FC = () => {
 					>
 						<Feed
 							unitId="YXegR/6lNM1JZVCpKyCFkg=="
-							networkName={selectedEcosystem.name}
+							ecosystemName={selectedEcosystem.name}
 							accountId={accountId ?? undefined}
 						/>
 					</div>
