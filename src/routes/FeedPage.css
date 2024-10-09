@@ -119,3 +119,16 @@ h2 {
 	color: #fff;
 	box-sizing: border-box;
 }
+
+.ecosystem-selector-input-disabled {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+	background-color: #000;
+	color: #fff;
+	box-sizing: border-box;
+	opacity: 0.5;
+}
