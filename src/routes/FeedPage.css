@@ -1,54 +1,54 @@
 .feed-page {
 	padding: 1rem 1rem;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 h2 {
-    max-width: min(calc(100vw - 4rem), 30ch);
-    overflow: hidden;
-    text-overflow: ellipsis;
+	max-width: min(calc(100vw - 4rem), 30ch);
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .flex-row {
-    display: flex;
+	display: flex;
 	flex-flow: row nowrap;
-    gap: 0 5rem;
-    margin-top: 20vh;
+	gap: 0 5rem;
+	margin-top: 20vh;
 }
 
 .flex-column {
-    display: flex;
+	display: flex;
 	flex-flow: column nowrap;
-    max-width: min(90%, 1500px);
-    height: 100%;
-    gap: 1rem;
-    align-items: flex-start;
+	max-width: min(90%, 1500px);
+	height: 100%;
+	gap: 1rem;
+	align-items: flex-start;
 }
 
 .right {
-    flex: 0 1 40ch;
-    min-width: 30ch;
-    align-self: flex-start;
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 0.5rem;
+	flex: 0 1 40ch;
+	min-width: 30ch;
+	align-self: flex-start;
+	display: flex;
+	flex-flow: column nowrap;
+	gap: 0.5rem;
 }
 
 .left {
-    flex: 2 1 300px;
-    height: max-content;
-    max-width: 1000px;
+	flex: 2 1 300px;
+	height: max-content;
+	max-width: 1000px;
 }
 
 .gm-post {
-    border-radius: 12px;
+	border-radius: 12px;
 }
 
 .footer {
-    padding: 5rem;
+	padding: 5rem;
 }
 
 @media (min-width: 768px) {
@@ -57,8 +57,78 @@ h2 {
 		padding: 1rem 5rem;
 	}
 
-    .flex-column {
-        align-items: center;
-        gap: 0;
-    }
+	.flex-column {
+		align-items: center;
+		gap: 0;
+	}
+}
+
+.network-selector {
+	width: 100%;
+}
+
+.network-selector h2 {
+	margin-bottom: 0.5rem;
+}
+
+.network-selector select {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 1rem;
+	background-color: #000;
+	color: #fff;
+	cursor: pointer;
+	appearance: none;
+	background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+	background-repeat: no-repeat;
+	background-position: right 0.7rem top 50%;
+	background-size: 0.65rem auto;
+	padding-right: 1.5rem;
+}
+
+.network-selector select:hover,
+.network-selector select:focus {
+	border-color: #007cb2;
+	outline: none;
+}
+
+.network-selector select option {
+	padding: 0.5rem;
+	font-size: 1rem;
+}
+
+.network-selector select option:hover,
+.network-selector select option:focus {
+	background-color: #f0f0f0;
+}
+
+.network-selector div {
+	margin-bottom: 0.5rem;
+}
+
+.network-selector-input {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+	background-color: #000;
+	color: #fff;
+	box-sizing: border-box;
+}
+
+.network-selector-input-disabled {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+	background-color: #000;
+	color: #fff;
+	box-sizing: border-box;
+	opacity: 0.5;
 }

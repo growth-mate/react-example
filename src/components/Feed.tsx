@@ -12,31 +12,52 @@ declare global {
 interface IFeed {
 	unitId: string;
 	accountId?: string;
+	network?: string;
 	className?: string;
 }
 
-const Feed: React.FC<IFeed> = ({ unitId, accountId, className }) => {
+const Feed: React.FC<IFeed> = ({ unitId, accountId, className, network }) => {
 	useEffect(() => {
-		if (window.growthmate !== undefined) window.growthmate.register(unitId);
+		const loadAndInitScript = () => {
+			return new Promise<void>((resolve) => {
+				let script: HTMLScriptElement | null = document.querySelector("#gm-script");
+				if (!script) {
+					script = document.createElement("script");
+					script.src = "https://cdn.growthmate.xyz/scripts/feed-manager.react.js";
+					script.id = "gm-script";
+					document.head.appendChild(script);
 
-		let script: HTMLScriptElement | null = document.querySelector("#gm-script");
-		if (!script) {
-			script = document.createElement("script");
-			script.src = "https://cdn.growthmate.xyz/scripts/feed-manager.react.js";
-			script.id = "gm-script";
-			document.head.appendChild(script);
-		}
+					script.onload = () => {
+						if (window.growthmate) {
+							window.growthmate.register(unitId);
+						}
+						resolve();
+					};
+				} else {
+					resolve();
+				}
+			});
+		};
 
-		script.addEventListener("load", () => window.growthmate.register(unitId));
+		loadAndInitScript().then(() => {
+			if (window.growthmate) {
+				window.growthmate.register(unitId);
+			}
+		});
 
-		return () => window.growthmate?.unregister(unitId);
-	}, [unitId]);
+		return () => {
+			if (window.growthmate) {
+				window.growthmate.unregister(unitId);
+			}
+		};
+	}, [unitId, accountId]);
 
 	return (
 		<div
 			className={`gm-feed ${className ?? ""}`}
 			data-gm-id={unitId}
 			data-gm-account-id={accountId ?? null}
+			data-gm-network={network ?? null}
 		>
 			<a className="gm-post--ghost" />
 			<a className="gm-post--ghost" />
