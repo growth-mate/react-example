@@ -63,15 +63,15 @@ h2 {
 	}
 }
 
-.ecosystem-selector {
+.network-selector {
 	width: 100%;
 }
 
-.ecosystem-selector h2 {
+.network-selector h2 {
 	margin-bottom: 0.5rem;
 }
 
-.ecosystem-selector select {
+.network-selector select {
 	width: 100%;
 	padding: 0.5rem;
 	border: 1px solid #ccc;
@@ -88,27 +88,27 @@ h2 {
 	padding-right: 1.5rem;
 }
 
-.ecosystem-selector select:hover,
-.ecosystem-selector select:focus {
+.network-selector select:hover,
+.network-selector select:focus {
 	border-color: #007cb2;
 	outline: none;
 }
 
-.ecosystem-selector select option {
+.network-selector select option {
 	padding: 0.5rem;
 	font-size: 1rem;
 }
 
-.ecosystem-selector select option:hover,
-.ecosystem-selector select option:focus {
+.network-selector select option:hover,
+.network-selector select option:focus {
 	background-color: #f0f0f0;
 }
 
-.ecosystem-selector div {
+.network-selector div {
 	margin-bottom: 0.5rem;
 }
 
-.ecosystem-selector-input {
+.network-selector-input {
 	width: 100%;
 	padding: 0.5rem;
 	border: 1px solid #ccc;
@@ -120,7 +120,7 @@ h2 {
 	box-sizing: border-box;
 }
 
-.ecosystem-selector-input-disabled {
+.network-selector-input-disabled {
 	width: 100%;
 	padding: 0.5rem;
 	border: 1px solid #ccc;

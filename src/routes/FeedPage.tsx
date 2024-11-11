@@ -3,14 +3,14 @@ import { WalletSelectorContext } from "../utils/wallet";
 import { useSearchParams } from "react-router-dom";
 import { Feed } from "../components";
 import "./FeedPage.css";
-import { Ecosystem, Ecosystems, truncateAccountDisplay } from "../utils/ecosystem";
+import { Network, truncateAccountDisplay } from "../utils/network";
 
 export const FeedPage: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [searchParams, _] = useSearchParams();
 	const walletSelector = useContext(WalletSelectorContext);
 	const isMobile = window.innerWidth <= 768;
-	const [selectedEcosystem, setSelectedEcosystem] = useState<Ecosystem>(Ecosystems[0]);
+	const [selectedNetwork, setSelectedNetwork] = useState<Network>(Network.Near);
 	const [accountId, setAccountId] = useState<string | null>(null);
 	const [inputAccountId, setInputAccountId] = useState<string>("");
 
@@ -29,7 +29,7 @@ export const FeedPage: React.FC = () => {
 						{accountId != null
 							? `GM, ${
 									accountId.length > 10
-										? truncateAccountDisplay(accountId, selectedEcosystem.name)
+										? truncateAccountDisplay(accountId, selectedNetwork)
 										: accountId
 							  }!`
 							: "Curated Actions for You"}
@@ -38,82 +38,63 @@ export const FeedPage: React.FC = () => {
 						Discover the latest offers and news in your ecosystem based on your transaction history. Log in
 						now and stay up to date! 🚀
 					</div>
-					<div className="ecosystem-selector">
+					<div className="network-selector">
 						<div>
-							<label htmlFor="ecosystem-select">
-								<h2>Select your Ecosystem</h2>
+							<label htmlFor="network-select">
+								<h2>Select Network</h2>
 							</label>
 							<select
-								id="ecosystem-select"
-								aria-label="Select your Ecosystem"
+								id="network-select"
+								aria-label="Select Network"
 								onChange={async (e) => {
 									// logout of near wallet if selector has accountId
 									if (walletSelector && walletSelector?.accountId != null) {
 										(await walletSelector!.selector.wallet()).signOut();
 									}
-									if (e.target.value != selectedEcosystem.name) {
+									if (e.target.value != selectedNetwork) {
 										setAccountId(null);
 									}
-									return setSelectedEcosystem(
-										Ecosystems.find((ecosystem) => ecosystem.name === e.target.value)!
-									);
+									return setSelectedNetwork(Network[e.target.value as keyof typeof Network]);
 								}}
 							>
-								{Ecosystems.map((ecosystem) => (
+								{Object.keys(Network).map((network) => (
 									<option
-										key={ecosystem.name}
-										value={ecosystem.name}
+										key={network}
+										value={network}
 									>
-										{ecosystem.name}
+										{network}
 									</option>
 								))}
 							</select>
 						</div>
 						<div>
-							<div className="ecosystem-selector">
-								{selectedEcosystem.name == "Near" ? (
+							<div className="network-selector">
+								{selectedNetwork == Network.Near ? (
 									<div>
 										<input
-											className="ecosystem-selector-input"
+											className="network-selector-input"
 											type="text"
-											// className="ecosystem-selector-input-disabled" in case of deactivation to allow only wallet connection
+											// className="network-selector-input-disabled" in case of deactivation to allow only wallet connection
 											// disabled={true}
 											placeholder="Enter wallet address or connect"
 											onChange={(e) => setInputAccountId(e.target.value)}
 										/>
-										{inputAccountId.length == 0 ? (
-											<button
-												className="connect-wallet"
-												onClick={async () => {
-													if (walletSelector?.accountId != null)
-														(await walletSelector!.selector.wallet()).signOut();
-													else walletSelector!.modal.show();
-												}}
-											>
-												{walletSelector && walletSelector?.accountId != null ? (
-													<p>Log Out</p>
-												) : (
-													<p>Connect Wallet</p>
-												)}
-											</button>
-										) : (
-											<button
-												className="connect-wallet"
-												onClick={() => {
-													setAccountId(inputAccountId);
-													if (inputAccountId.length == 0) {
-														setAccountId(null);
-													}
-												}}
-											>
-												Load Feed
-											</button>
-										)}
+										<button
+											className="connect-wallet"
+											onClick={() => {
+												setAccountId(inputAccountId);
+												if (inputAccountId.length == 0) {
+													setAccountId(null);
+												}
+											}}
+										>
+											Load Feed
+										</button>
 									</div>
 								) : (
 									<div>
 										<input
-											className="ecosystem-selector-input"
+											className="network-selector-input"
 											type="text"
 											placeholder="Enter your Wallet Address"
 											onChange={(e) => setInputAccountId(e.target.value)}
@@ -147,7 +128,7 @@ export const FeedPage: React.FC = () => {
 					>
 						<Feed
 							unitId="YXegR/6lNM1JZVCpKyCFkg=="
-							ecosystemName={selectedEcosystem.name}
+							network={selectedNetwork}
 							accountId={accountId ?? undefined}
 						/>
 					</div>
@@ -179,7 +160,7 @@ export const FeedPage: React.FC = () => {
 					>
 						<Feed
 							unitId="YXegR/6lNM1JZVCpKyCFkg=="
-							ecosystemName={selectedEcosystem.name}
+							network={selectedNetwork}
 							accountId={accountId ?? undefined}
 						/>
 					</div>
@@ -188,7 +169,7 @@ export const FeedPage: React.FC = () => {
 							{accountId != null
 								? `GM, ${
 										accountId.length > 10
-											? truncateAccountDisplay(accountId, selectedEcosystem.name)
+											? truncateAccountDisplay(accountId, selectedNetwork)
 											: accountId
 								  }!`
 								: "Curated Actions for You"}
@@ -197,80 +178,61 @@ export const FeedPage: React.FC = () => {
 							Discover the latest offers and news in your ecosystem based on your transaction history. Log
 							in now and stay up to date! 🚀
 						</div>
-						<div className="ecosystem-selector">
+						<div className="network-selector">
 							<div>
-								<label htmlFor="ecosystem-select">
-									<h2>Select your Ecosystem</h2>
+								<label htmlFor="network-select">
+									<h2>Select Network</h2>
 								</label>
 								<select
-									id="ecosystem-select"
-									aria-label="Select your Ecosystem"
+									id="network-select"
+									aria-label="Select Network"
 									onChange={async (e) => {
 										// logout of near wallet if selector has accountId
 										if (walletSelector && walletSelector?.accountId != null) {
 											(await walletSelector!.selector.wallet()).signOut();
 										}
-										if (e.target.value != selectedEcosystem.name) {
+										if (e.target.value != selectedNetwork) {
 											setAccountId(null);
 										}
-										return setSelectedEcosystem(
-											Ecosystems.find((ecosystem) => ecosystem.name === e.target.value)!
-										);
+										return setSelectedNetwork(Network[e.target.value as keyof typeof Network]);
 									}}
 								>
-									{Ecosystems.map((ecosystem) => (
+									{Object.keys(Network).map((network) => (
 										<option
-											key={ecosystem.name}
-											value={ecosystem.name}
+											key={network}
+											value={network}
 										>
-											{ecosystem.name}
+											{network}
 										</option>
 									))}
 								</select>
 							</div>
 							<div>
-								<div className="ecosystem-selector">
-									{selectedEcosystem.name == "Near" ? (
+								<div className="network-selector">
+									{selectedNetwork == Network.Near ? (
 										<div>
 											<input
-												className="ecosystem-selector-input"
+												className="network-selector-input"
 												type="text"
 												placeholder="Enter wallet address or connect"
 												onChange={(e) => setInputAccountId(e.target.value)}
 											/>
-											{inputAccountId.length == 0 ? (
-												<button
-													className="connect-wallet"
-													onClick={async () => {
-														if (walletSelector?.accountId != null)
-															(await walletSelector!.selector.wallet()).signOut();
-														else walletSelector!.modal.show();
-													}}
-												>
-													{walletSelector && walletSelector?.accountId != null ? (
-														<p>Log Out</p>
-													) : (
-														<p>Connect Wallet</p>
-													)}
-												</button>
-											) : (
-												<button
-													className="connect-wallet"
-													onClick={() => {
-														setAccountId(inputAccountId);
-														if (inputAccountId.length == 0) {
-															setAccountId(null);
-														}
-													}}
-												>
-													Load Feed
-												</button>
-											)}
+											<button
+												className="connect-wallet"
+												onClick={() => {
+													setAccountId(inputAccountId);
+													if (inputAccountId.length == 0) {
+														setAccountId(null);
+													}
+												}}
+											>
+												Load Feed
+											</button>
 										</div>
 									) : (
 										<div>
 											<input
-												className="ecosystem-selector-input"
+												className="network-selector-input"
 												type="text"
 												placeholder="Enter your Wallet Address"
 												onChange={(e) => setInputAccountId(e.target.value)}

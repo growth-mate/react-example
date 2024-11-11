@@ -12,11 +12,11 @@ declare global {
 interface IFeed {
 	unitId: string;
 	accountId?: string;
+	network?: string;
 	className?: string;
-	ecosystemName?: string;
 }
 
-const Feed: React.FC<IFeed> = ({ unitId, accountId, className, ecosystemName }) => {
+const Feed: React.FC<IFeed> = ({ unitId, accountId, className, network }) => {
 	useEffect(() => {
 		const loadAndInitScript = () => {
 			return new Promise<void>((resolve) => {
@@ -57,7 +57,7 @@ const Feed: React.FC<IFeed> = ({ unitId, accountId, className, ecosystemName }) 
 			className={`gm-feed ${className ?? ""}`}
 			data-gm-id={unitId}
 			data-gm-account-id={accountId ?? null}
-			data-gm-ecosystem-name={ecosystemName ?? null}
+			data-gm-network={network ?? null}
 		>
 			<a className="gm-post--ghost" />
 			<a className="gm-post--ghost" />

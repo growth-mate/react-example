@@ -1,22 +1,12 @@
-export type Ecosystem = {
-	name: string;
-	paragraph: string;
-};
+export enum Network {
+	Near = "Near",
+    Ethereum = "Ethereum",
+    Polygon = "Polygon",
+    Optimism = "Optimism",
+    Arbitrum = "Arbitrum",
+    Base = "Base",
+}
 
-export const Ecosystems: Ecosystem[] = [
-	{
-  name: "Near",
-  paragraph: "The Near ecosystem",
-},
-{
-  name: "Ethereum",
-  paragraph: "The Ethereum ecosystem",
-},
-{
-  name: "Polygon",
-  paragraph: "The Polygon ecosystem",
-},
-];
 
 export function truncateAccountDisplay(accountId: string, ecosystem: string) {
 	switch (ecosystem) {
