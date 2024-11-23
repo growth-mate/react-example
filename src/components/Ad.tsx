@@ -13,10 +13,11 @@ interface IAd {
 	unitId: string;
 	format: string;
 	accountId?: string;
+	network?: string;
 	className?: string;
 }
 
-const Ad: React.FC<IAd> = ({ unitId, format, accountId, className }) => {
+const Ad: React.FC<IAd> = ({ unitId, format, accountId, network, className }) => {
 	useEffect(() => {
 		if (window.growthmate !== undefined) window.growthmate.register(unitId);
 
@@ -39,6 +40,7 @@ const Ad: React.FC<IAd> = ({ unitId, format, accountId, className }) => {
 			data-gm-id={unitId}
 			data-gm-format={format}
 			data-gm-account-id={accountId ?? null}
+			data-gm-network={network ?? null}
 		></a>
 	);
 };

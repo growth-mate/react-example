@@ -3,14 +3,17 @@ import { WalletSelectorContext } from "../utils/wallet";
 import { useSearchParams } from "react-router-dom";
 import { Feed } from "../components";
 import "./FeedPage.css";
-import { Network, truncateAccountDisplay } from "../utils/network";
+import { truncateAccountDisplay } from "../utils/network";
+
+const networks = ["Near", "Ethereum", "Polygon", "Optimism", "Arbitrum", "Base"] as const;
+type Network = (typeof networks)[number];
 
 export const FeedPage: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [searchParams, _] = useSearchParams();
 	const walletSelector = useContext(WalletSelectorContext);
 	const isMobile = window.innerWidth <= 768;
-	const [selectedNetwork, setSelectedNetwork] = useState<Network>(Network.Near);
+	const [selectedNetwork, setSelectedNetwork] = useState<Network>("Near");
 	const [accountId, setAccountId] = useState<string | null>(null);
 	const [inputAccountId, setInputAccountId] = useState<string>("");
 
@@ -54,10 +57,10 @@ export const FeedPage: React.FC = () => {
 									if (e.target.value != selectedNetwork) {
 										setAccountId(null);
 									}
-									return setSelectedNetwork(Network[e.target.value as keyof typeof Network]);
+									return setSelectedNetwork(e.target.value as Network);
 								}}
 							>
-								{Object.keys(Network).map((network) => (
+								{["Near", "Ethereum", "Polygon", "Optimism", "Arbitrum", "Base"].map((network) => (
 									<option
 										key={network}
 										value={network}
@@ -69,7 +72,7 @@ export const FeedPage: React.FC = () => {
 						</div>
 						<div>
 							<div className="network-selector">
-								{selectedNetwork == Network.Near ? (
+								{selectedNetwork == "Near" ? (
 									<div>
 										<input
 											className="network-selector-input"
@@ -194,10 +197,10 @@ export const FeedPage: React.FC = () => {
 										if (e.target.value != selectedNetwork) {
 											setAccountId(null);
 										}
-										return setSelectedNetwork(Network[e.target.value as keyof typeof Network]);
+										return setSelectedNetwork(e.target.value as Network);
 									}}
 								>
-									{Object.keys(Network).map((network) => (
+									{networks.map((network) => (
 										<option
 											key={network}
 											value={network}
@@ -209,7 +212,7 @@ export const FeedPage: React.FC = () => {
 							</div>
 							<div>
 								<div className="network-selector">
-									{selectedNetwork == Network.Near ? (
+									{selectedNetwork == "Near" ? (
 										<div>
 											<input
 												className="network-selector-input"

@@ -1,13 +1,3 @@
-export enum Network {
-	Near = "Near",
-    Ethereum = "Ethereum",
-    Polygon = "Polygon",
-    Optimism = "Optimism",
-    Arbitrum = "Arbitrum",
-    Base = "Base",
-}
-
-
 export function truncateAccountDisplay(accountId: string, ecosystem: string) {
 	switch (ecosystem) {
 		case "Near":
