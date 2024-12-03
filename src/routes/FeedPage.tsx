@@ -97,14 +97,12 @@ export const FeedPage: React.FC = () => {
 						</Button>
 					</div>
 					<br />
-					<br />
 					<Feed
 						unitId={searchParams.get("unitId") ?? "YXegR/6lNM1JZVCpKyCFkg=="}
 						network={selectedNetwork}
 						accountId={accountId ?? undefined}
 						className="mobile-feed"
 					/>
-					<br />
 					<br />
 					<div style={{ marginTop: "auto", opacity: 0.3 }}>
 						This is an example implementation of a GrowthMate feed. <br /> More info at{" "}
