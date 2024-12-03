@@ -1,6 +1,6 @@
 .ad-page {
     margin: auto;
-    min-height: calc(100vh);
+    min-height: calc(100vh - 2rem);
     width: fit-content;
     display: grid;
     grid-template-areas:
