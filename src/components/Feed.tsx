@@ -1,13 +1,6 @@
-import React, { useEffect } from "react";
-
-declare global {
-	interface Window {
-		growthmate: {
-			register: (unitId: string) => void;
-			unregister: (unitId: string) => void;
-		};
-	}
-}
+import React from "react";
+import { useFeed, PostData, PostId } from "../utils/growthmate";
+import "./Feed.css";
 
 interface IFeed {
 	unitId: string;
@@ -17,52 +10,75 @@ interface IFeed {
 }
 
 const Feed: React.FC<IFeed> = ({ unitId, accountId, className, network }) => {
-	useEffect(() => {
-		const loadAndInitScript = () => {
-			return new Promise<void>((resolve) => {
-				let script: HTMLScriptElement | null = document.querySelector("#gm-script");
-				if (!script) {
-					script = document.createElement("script");
-					script.src = "https://cdn.growthmate.xyz/scripts/feed-manager.react.js";
-					script.id = "gm-script";
-					document.head.appendChild(script);
-
-					script.onload = () => {
-						if (window.growthmate) {
-							window.growthmate.register(unitId);
-						}
-						resolve();
-					};
-				} else {
-					resolve();
-				}
-			});
-		};
-
-		loadAndInitScript().then(() => {
-			if (window.growthmate) {
-				window.growthmate.register(unitId);
-			}
-		});
-
-		return () => {
-			if (window.growthmate) {
-				window.growthmate.unregister(unitId);
-			}
-		};
-	}, [unitId, accountId]);
+	const { feed, registerClick } = useFeed(unitId, accountId, network);
 
 	return (
 		<div
-			className={`gm-feed ${className ?? ""}`}
+			className={`my-feed ${className ?? ""}`}
 			data-gm-id={unitId}
 			data-gm-account-id={accountId ?? null}
 			data-gm-network={network ?? null}
 		>
-			<a className="gm-post--ghost" />
-			<a className="gm-post--ghost" />
-			<a className="gm-post--ghost" />
+			{feed.map((post) => (
+				<Post
+					key={post.postId}
+					postId={post.postId}
+					data={post}
+					registerClick={registerClick}
+				/>
+			))}
 		</div>
+	);
+};
+
+interface IPost {
+	postId: PostId;
+	data: PostData;
+	registerClick: (postId: PostId) => void;
+	className?: string;
+}
+
+const Post: React.FC<IPost> = ({ postId, data, registerClick, className }) => {
+	return (
+		<a
+			ref={(ref) => ref && window.growthmate.registerPost(postId, ref)}
+			className={`my-post ${className ?? ""}`}
+			href={data.link}
+			target="_blank"
+			rel="noopener"
+			onClick={() => {
+				registerClick(postId);
+				return true;
+			}}
+		>
+			<div className="my-post-cta">{data.cta}</div>
+			<div className="my-post-headline">{data.headline}</div>
+			<div className="my-post-description">{data.description}</div>
+			<div className="my-post-footer">
+				<div className="my-post-topics">
+					{data.topics.map((topic) => (
+						<div
+							key={topic}
+							className="chip"
+						>
+							{topic}
+						</div>
+					))}
+				</div>
+				<div className="my-post-details">
+					{`${new Date(data.createdAt).toLocaleDateString("en-US", {
+						month: "short",
+						day: "numeric",
+						year: "numeric",
+					})}  •  ${data.projectName}`}
+				</div>
+			</div>
+			<img
+				className="my-post-avatar"
+				src={data.avatar}
+				alt={data.projectName}
+			/>
+		</a>
 	);
 };
 

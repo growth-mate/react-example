@@ -4,6 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import { Feed } from "../components";
 import "./FeedPage.css";
 import { truncateAccountDisplay } from "../utils/network";
+import { Button, Select, TextField } from "@radix-ui/themes";
+import { ArrowRightIcon } from "lucide-react";
 
 const networks = ["Near", "Ethereum", "Polygon", "Optimism", "Arbitrum", "Base"] as const;
 type Network = (typeof networks)[number];
@@ -31,7 +33,7 @@ export const FeedPage: React.FC = () => {
 					<h2>
 						{accountId != null
 							? `GM, ${
-									accountId.length > 10
+									accountId.length > 20
 										? truncateAccountDisplay(accountId, selectedNetwork)
 										: accountId
 							  }!`
@@ -41,100 +43,69 @@ export const FeedPage: React.FC = () => {
 						Discover the latest offers and news in your ecosystem based on your transaction history. Log in
 						now and stay up to date! 🚀
 					</div>
-					<div className="network-selector">
-						<div>
-							<label htmlFor="network-select">
-								<h2>Select Network</h2>
-							</label>
-							<select
-								id="network-select"
-								aria-label="Select Network"
-								onChange={async (e) => {
-									// logout of near wallet if selector has accountId
-									if (walletSelector && walletSelector?.accountId != null) {
-										(await walletSelector!.selector.wallet()).signOut();
-									}
-									if (e.target.value != selectedNetwork) {
-										setAccountId(null);
-									}
-									return setSelectedNetwork(e.target.value as Network);
-								}}
-							>
-								{["Near", "Ethereum", "Polygon", "Optimism", "Arbitrum", "Base"].map((network) => (
-									<option
+					<div className="inputs">
+						<Select.Root
+							size="3"
+							value={selectedNetwork}
+							onValueChange={(value: Network) => setSelectedNetwork(value)}
+						>
+							<Select.Trigger
+								className="network-input"
+								variant="soft"
+								color="gray"
+							/>
+							<Select.Content>
+								{networks.map((network) => (
+									<Select.Item
 										key={network}
 										value={network}
 									>
 										{network}
-									</option>
+									</Select.Item>
 								))}
-							</select>
-						</div>
-						<div>
-							<div className="network-selector">
-								{selectedNetwork == "Near" ? (
-									<div>
-										<input
-											className="network-selector-input"
-											type="text"
-											// className="network-selector-input-disabled" in case of deactivation to allow only wallet connection
-											// disabled={true}
-											placeholder="Enter wallet address or connect"
-											onChange={(e) => setInputAccountId(e.target.value)}
-										/>
-										<button
-											className="connect-wallet"
-											onClick={() => {
-												setAccountId(inputAccountId);
-												if (inputAccountId.length == 0) {
-													setAccountId(null);
-												}
-											}}
-										>
-											Load Feed
-										</button>
-									</div>
-								) : (
-									<div>
-										<input
-											className="network-selector-input"
-											type="text"
-											placeholder="Enter your Wallet Address"
-											onChange={(e) => setInputAccountId(e.target.value)}
-										/>
-										<button
-											className="connect-wallet"
-											onClick={() => {
-												setAccountId(inputAccountId);
-												if (inputAccountId.length == 0) {
-													setAccountId(null);
-												}
-											}}
-										>
-											Load Feed
-										</button>
-									</div>
-								)}
-							</div>
-						</div>
-					</div>
-					<br />
-					<br />
-					<div
-						style={
-							searchParams.has("unblur") ||
-							(walletSelector && walletSelector?.accountId != null) ||
-							accountId != null
-								? {}
-								: { filter: "blur(10px)" }
-						}
-					>
-						<Feed
-							unitId="YXegR/6lNM1JZVCpKyCFkg=="
-							network={selectedNetwork}
-							accountId={accountId ?? undefined}
+							</Select.Content>
+						</Select.Root>
+						<TextField.Root
+							color="gray"
+							variant="soft"
+							size="3"
+							className="account-input"
+							placeholder="Wallet Address"
+							onChange={(e) => setInputAccountId(e.target.value)}
+							onKeyDown={(e) => {
+								if (e.key === "Enter") {
+									setAccountId(inputAccountId);
+									if (inputAccountId.length == 0) {
+										setAccountId(null);
+									}
+								}
+							}}
 						/>
+						<Button
+							variant="soft"
+							color="gray"
+							size="3"
+							className="submit-button"
+							onClick={() => {
+								setAccountId(inputAccountId);
+								if (inputAccountId.length == 0) {
+									setAccountId(null);
+								}
+							}}
+						>
+							<ArrowRightIcon />
+						</Button>
 					</div>
+					<br />
+					<br />
+					<Feed
+						unitId={searchParams.get("unitId") ?? "YXegR/6lNM1JZVCpKyCFkg=="}
+						network={selectedNetwork}
+						accountId={accountId ?? undefined}
+						className="mobile-feed"
+					/>
+					<br />
+					<br />
 					<div style={{ marginTop: "auto", opacity: 0.3 }}>
 						This is an example implementation of a GrowthMate feed. <br /> More info at{" "}
 						<a href="https://github.com/growth-mate/react-example/tree/main">
@@ -151,27 +122,18 @@ export const FeedPage: React.FC = () => {
 		<div className="feed-page">
 			<div className="flex-column">
 				<div className="flex-row">
-					<div
-						className="left"
-						style={
-							searchParams.has("unblur") ||
-							(walletSelector && walletSelector?.accountId != null) ||
-							accountId != null
-								? {}
-								: { filter: "blur(10px)" }
-						}
-					>
+					<div className="left">
 						<Feed
-							unitId="YXegR/6lNM1JZVCpKyCFkg=="
+							unitId={searchParams.get("unitId") ?? "YXegR/6lNM1JZVCpKyCFkg=="}
 							network={selectedNetwork}
 							accountId={accountId ?? undefined}
 						/>
 					</div>
-					<div className="right">
+					<div className="right sticky">
 						<h2>
 							{accountId != null
 								? `GM, ${
-										accountId.length > 10
+										accountId.length > 20
 											? truncateAccountDisplay(accountId, selectedNetwork)
 											: accountId
 								  }!`
@@ -181,80 +143,58 @@ export const FeedPage: React.FC = () => {
 							Discover the latest offers and news in your ecosystem based on your transaction history. Log
 							in now and stay up to date! 🚀
 						</div>
-						<div className="network-selector">
-							<div>
-								<label htmlFor="network-select">
-									<h2>Select Network</h2>
-								</label>
-								<select
-									id="network-select"
-									aria-label="Select Network"
-									onChange={async (e) => {
-										// logout of near wallet if selector has accountId
-										if (walletSelector && walletSelector?.accountId != null) {
-											(await walletSelector!.selector.wallet()).signOut();
-										}
-										if (e.target.value != selectedNetwork) {
-											setAccountId(null);
-										}
-										return setSelectedNetwork(e.target.value as Network);
-									}}
-								>
+						<div className="inputs">
+							<Select.Root
+								size="3"
+								value={selectedNetwork}
+								onValueChange={(value: Network) => setSelectedNetwork(value)}
+							>
+								<Select.Trigger
+									className="network-input"
+									variant="soft"
+									color="gray"
+								/>
+								<Select.Content>
 									{networks.map((network) => (
-										<option
+										<Select.Item
 											key={network}
 											value={network}
 										>
 											{network}
-										</option>
+										</Select.Item>
 									))}
-								</select>
-							</div>
-							<div>
-								<div className="network-selector">
-									{selectedNetwork == "Near" ? (
-										<div>
-											<input
-												className="network-selector-input"
-												type="text"
-												placeholder="Enter wallet address or connect"
-												onChange={(e) => setInputAccountId(e.target.value)}
-											/>
-											<button
-												className="connect-wallet"
-												onClick={() => {
-													setAccountId(inputAccountId);
-													if (inputAccountId.length == 0) {
-														setAccountId(null);
-													}
-												}}
-											>
-												Load Feed
-											</button>
-										</div>
-									) : (
-										<div>
-											<input
-												className="network-selector-input"
-												type="text"
-												placeholder="Enter your Wallet Address"
-												onChange={(e) => setInputAccountId(e.target.value)}
-											/>
-											<button
-												className="connect-wallet"
-												onClick={() => {
-													setAccountId(inputAccountId);
-													if (inputAccountId.length == 0) {
-														setAccountId(null);
-													}
-												}}
-											>
-												Load Feed
-											</button>
-										</div>
-									)}
-								</div>
-							</div>
+								</Select.Content>
+							</Select.Root>
+							<TextField.Root
+								color="gray"
+								variant="soft"
+								size="3"
+								className="account-input"
+								placeholder="Wallet Address"
+								onChange={(e) => setInputAccountId(e.target.value)}
+								onKeyDown={(e) => {
+									if (e.key === "Enter") {
+										setAccountId(inputAccountId);
+										if (inputAccountId.length == 0) {
+											setAccountId(null);
+										}
+									}
+								}}
+							/>
+							<Button
+								variant="soft"
+								color="gray"
+								size="3"
+								className="submit-button"
+								onClick={() => {
+									setAccountId(inputAccountId);
+									if (inputAccountId.length == 0) {
+										setAccountId(null);
+									}
+								}}
+							>
+								<ArrowRightIcon />
+							</Button>
 						</div>
 					</div>
 				</div>

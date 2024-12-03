@@ -1,14 +1,5 @@
 import React, { useEffect } from "react";
 
-declare global {
-	interface Window {
-		growthmate: {
-			register: (unitId: string) => void;
-			unregister: (unitId: string) => void;
-		};
-	}
-}
-
 interface IAd {
 	unitId: string;
 	format: string;
@@ -19,7 +10,7 @@ interface IAd {
 
 const Ad: React.FC<IAd> = ({ unitId, format, accountId, network, className }) => {
 	useEffect(() => {
-		if (window.growthmate !== undefined) window.growthmate.register(unitId);
+		if (window.growthmate !== undefined) window.growthmate.registerUnit(unitId);
 
 		let script: HTMLScriptElement | null = document.querySelector("#gm-script");
 		if (!script) {
@@ -29,9 +20,9 @@ const Ad: React.FC<IAd> = ({ unitId, format, accountId, network, className }) =>
 			document.head.appendChild(script);
 		}
 
-		script.addEventListener("load", () => window.growthmate.register(unitId));
+		script.addEventListener("load", () => window.growthmate.registerUnit(unitId));
 
-		return () => window.growthmate?.unregister(unitId);
+		return () => window.growthmate?.unregisterUnit(unitId);
 	}, [unitId]);
 
 	return (

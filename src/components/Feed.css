@@ -1,0 +1,99 @@
+.my-feed {
+	display: flex;
+	flex-direction: column;
+    background-color: #222321;
+    border-radius: 9px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.my-post {
+	font-family: "Sofia Sans", sans-serif;
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+    display: grid;
+	grid-template-areas:
+		"cta avatar"
+		"headline avatar"
+		"description avatar"
+		"footer avatar";
+	grid-template-columns: 1fr 60px;
+    column-gap: 20px;
+	padding: 20px;
+    border-bottom: 1px solid #fff2;
+}
+
+.my-post:last-child {
+	border-bottom: none;
+}
+
+.my-post-cta {
+	grid-area: cta;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.my-post-headline {
+	grid-area: headline;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.my-post-description {
+	grid-area: description;
+    font-size: 14px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 200ms ease-in-out;
+}
+
+.my-post:hover .my-post-description {
+    max-height: 100px;
+}
+
+.my-post-topics {
+	grid-area: topics;
+    font-size: 14px;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 6px;
+}
+
+.chip {
+    font-family: "Source Sans Pro", sans-serif;
+    text-transform: uppercase;
+	color: #fff6;
+    font-weight: bold;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background-color: #fff1;
+}
+
+.my-post-details {
+	grid-area: details;
+    font-size: 12px;
+	color: #fff6;
+    white-space: pre;
+}
+
+.my-post-footer {
+    grid-area: footer;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.my-post-avatar {
+	grid-area: avatar;
+	align-self: flex-start;
+	justify-self: center;
+	width: 60px;
+	height: 60px;
+	object-fit: contain;
+	border-radius: 100%;
+}
