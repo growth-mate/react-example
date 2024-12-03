@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
 
+declare global {
+	interface Window {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		growthmate: any;
+	}
+}
+
 interface IAd {
 	unitId: string;
 	format: string;
@@ -10,19 +17,19 @@ interface IAd {
 
 const Ad: React.FC<IAd> = ({ unitId, format, accountId, network, className }) => {
 	useEffect(() => {
-		if (window.growthmate !== undefined) window.growthmate.registerUnit(unitId);
+		if (window.growthmate !== undefined) window.growthmate.register(unitId);
 
-		let script: HTMLScriptElement | null = document.querySelector("#gm-script");
+		let script: HTMLScriptElement | null = document.querySelector("#gm-ad-script");
 		if (!script) {
 			script = document.createElement("script");
 			script.src = "https://cdn.growthmate.xyz/scripts/ad-unit-manager.react.js";
-			script.id = "gm-script";
+			script.id = "gm-ad-script";
 			document.head.appendChild(script);
 		}
 
-		script.addEventListener("load", () => window.growthmate.registerUnit(unitId));
+		script.addEventListener("load", () => window.growthmate.register(unitId));
 
-		return () => window.growthmate?.unregisterUnit(unitId);
+		return () => window.growthmate?.unregister(unitId);
 	}, [unitId]);
 
 	return (

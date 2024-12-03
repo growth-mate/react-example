@@ -8,19 +8,7 @@ export const AdPage: React.FC = () => {
 
 	return (
 		<div className="ad-page">
-			<div className="ad-top">
-				<Ad
-					unitId="1W7xUZDbrIAMhKseC6tSUA=="
-					format="Leaderboard"
-				/>
-			</div>
-			<div className="ad-left">
-				<Ad
-					unitId="OhHdiR6xO06CdOhrlnmr/A=="
-					format="Small Rectangle"
-				/>
-			</div>
-			<div className="ad-main">
+			<div className="main">
 				<h1>
 					{walletSelector && walletSelector?.accountId != null ? `GM, ${walletSelector!.accountId}!` : "GM!"}
 				</h1>
@@ -40,6 +28,24 @@ export const AdPage: React.FC = () => {
 					>
 						{walletSelector && walletSelector?.accountId != null ? <p>Log Out</p> : <p>Connect Wallet</p>}
 					</button>
+				</div>
+			</div>
+			<div className="ads">
+				<div className="overflow-scroll">
+					<div className="resizable">
+						<Ad
+							unitId="1W7xUZDbrIAMhKseC6tSUA=="
+							format="Leaderboard"
+						/>
+					</div>
+				</div>
+				<div className="overflow-scroll">
+					<div className="resizable">
+						<Ad
+							unitId="OhHdiR6xO06CdOhrlnmr/A=="
+							format="Small Rectangle"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

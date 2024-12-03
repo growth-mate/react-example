@@ -10,14 +10,12 @@ interface IFeed {
 }
 
 const Feed: React.FC<IFeed> = ({ unitId, accountId, className, network }) => {
-	const { feed, registerClick } = useFeed(unitId, accountId, network);
+	const { feed, feedProps, registerClick } = useFeed(unitId, accountId, network);
 
 	return (
 		<div
 			className={`my-feed ${className ?? ""}`}
-			data-gm-id={unitId}
-			data-gm-account-id={accountId ?? null}
-			data-gm-network={network ?? null}
+			{...feedProps}
 		>
 			{feed.map((post) => (
 				<Post

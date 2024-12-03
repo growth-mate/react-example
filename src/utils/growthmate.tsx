@@ -2,11 +2,8 @@ import { useEffect, useState, useRef } from "react";
 
 declare global {
 	interface Window {
-		growthmate: {
-			registerUnit: (unitId: string) => void;
-			unregisterUnit: (unitId: string) => void;
-			registerPost: (unitId: string, post: HTMLElement) => void;
-		};
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		growthmate: any;
 	}
 }
 
@@ -36,11 +33,11 @@ const useFeed = (unitId: string, accountId?: string, network?: string) => {
 	useEffect(() => {
 		if (window.growthmate !== undefined) window.growthmate.registerUnit(unitId);
 
-		let script: HTMLScriptElement | null = document.querySelector("#gm-script");
+		let script: HTMLScriptElement | null = document.querySelector("#gm-feed-script");
 		if (!script) {
 			script = document.createElement("script");
 			script.src = "https://cdn.growthmate.xyz/scripts/feed-manager.react.js";
-			script.id = "gm-script";
+			script.id = "gm-feed-script";
 			document.head.appendChild(script);
 		}
 
@@ -54,7 +51,15 @@ const useFeed = (unitId: string, accountId?: string, network?: string) => {
 		return () => window.growthmate?.unregisterUnit(unitId);
 	}, [unitId, accountId, network]);
 
-	return { feed, registerClick: registerClickRef.current! };
+	return {
+		feed,
+		feedProps: {
+			"data-gm-id": unitId,
+			"data-gm-account-id": accountId ?? null,
+			"data-gm-network": network ?? null,
+		},
+		registerClick: registerClickRef.current!,
+	};
 };
 
 export { useFeed };
