@@ -10,14 +10,21 @@ export const AdPage: React.FC = () => {
 		<div className="ad-page">
 			<div className="main">
 				<h1>
-					{walletSelector && walletSelector?.accountId != null ? `GM, ${walletSelector!.accountId}!` : "GM!"}
+					{walletSelector && walletSelector?.accountId != null
+						? `GM, ${walletSelector!.accountId}!`
+						: "No more boring ads!"}
 				</h1>
 				<div>
-					This is an example implementation of a GrowthMate ad unit. <br /> More info at{" "}
-					<a href="https://github.com/growth-mate/ad-widget/tree/main">
-						https://github.com/growth-mate/ad-widget
+					Our ad units only serve relevant ads that are based on your users recent on-chain activity.
+					<br />
+					This is an example implementation of a GrowthMate ad unit.{" "}
+					<a
+						className="more-info"
+						href="https://github.com/growth-mate/react-example/tree/main"
+					>
+						More info
 					</a>
-					.<br />
+					<br />
 					<br />
 					<button
 						className="connect-wallet"
