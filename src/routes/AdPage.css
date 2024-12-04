@@ -9,6 +9,8 @@
     grid-template-rows: 1fr 1fr;
     gap: 1rem;
     padding: 1rem;
+    height: 100%;
+    overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -31,7 +33,7 @@
     display: flex;
     flex-flow: row wrap;
     gap: 1rem;
-    row-gap: 0;
+    row-gap: calc(1rem - 8px);
     align-self: flex-start;
 }
 
@@ -61,6 +63,7 @@
     overflow: scroll;
     scrollbar-width: none;  /* Firefox */
     -ms-overflow-style: none;  /* IE and Edge */
+    margin: 0 -8px;
 }
 
 .overflow-scroll::-webkit-scrollbar {
