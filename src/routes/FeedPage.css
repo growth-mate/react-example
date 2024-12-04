@@ -83,7 +83,7 @@ h2 {
 	flex-flow: row nowrap;
 	gap: 0;
     width: 100%;
-    margin-top: 1rem;
+    margin: 1rem 0;
 }
 
 .network-input {
