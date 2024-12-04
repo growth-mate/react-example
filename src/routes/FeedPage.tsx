@@ -96,7 +96,6 @@ export const FeedPage: React.FC = () => {
 							<ArrowRightIcon />
 						</Button>
 					</div>
-					<br />
 					<Feed
 						unitId={searchParams.get("unitId") ?? "YXegR/6lNM1JZVCpKyCFkg=="}
 						network={selectedNetwork}
