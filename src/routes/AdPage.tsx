@@ -43,6 +43,7 @@ export const AdPage: React.FC = () => {
 						<Ad
 							unitId="1W7xUZDbrIAMhKseC6tSUA=="
 							format="Leaderboard"
+							network="Near"
 						/>
 					</div>
 				</div>
@@ -51,6 +52,7 @@ export const AdPage: React.FC = () => {
 						<Ad
 							unitId="OhHdiR6xO06CdOhrlnmr/A=="
 							format="Small Rectangle"
+							network="Near"
 						/>
 					</div>
 				</div>
