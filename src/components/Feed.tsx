@@ -71,11 +71,13 @@ const Post: React.FC<IPost> = ({ postId, data, registerClick, className }) => {
 					})}  •  ${data.projectName}`}
 				</div>
 			</div>
-			<img
-				className="my-post-avatar"
-				src={data.avatar}
-				alt={data.projectName}
-			/>
+			{!!data.avatar && (
+				<img
+					className="my-post-avatar"
+					src={data.avatar}
+					alt={data.projectName}
+				/>
+			)}
 		</a>
 	);
 };
