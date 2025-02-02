@@ -80,7 +80,7 @@
 	grid-area: details;
     font-size: 12px;
 	color: #fff6;
-    white-space: pre;
+    white-space: pre-wrap;
 }
 
 .my-post-footer {
