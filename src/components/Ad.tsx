@@ -22,7 +22,7 @@ const Ad: React.FC<IAd> = ({ unitId, format, accountId, network, className }) =>
 		let script: HTMLScriptElement | null = document.querySelector("#gm-ad-script");
 		if (!script) {
 			script = document.createElement("script");
-			script.src = "https://cdn.growthmate.xyz/scripts/ad-unit-manager.react.js";
+			script.src = "https://cdn.growthmate.xyz/scripts/v0.3.2/ad-unit-manager.react.js";
 			script.id = "gm-ad-script";
 			document.head.appendChild(script);
 		}

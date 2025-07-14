@@ -1,0 +1,11 @@
+.pure-ad-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.gm-ad-unit {
+	border-radius: 12px;
+    margin: 0 24px;
+}

@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AdPage, FeedPage } from "./routes";
 import React from "react";
+import { PureAdPage } from "./routes/PureAdPage";
 
 const App = () => {
 	// Enable Amplitude
@@ -24,6 +25,10 @@ const App = () => {
 			<Route
 				path="/ads"
 				element={<AdPage />}
+			/>
+			<Route
+				path="/pure-ads"
+				element={<PureAdPage />}
 			/>
 			<Route
 				path="/feeds"
