@@ -5,7 +5,7 @@
     height: 100vh;
 }
 
-.gm-ad-unit {
+.pure-ad-page .gm-ad-unit {
 	border-radius: 12px;
     margin: 0 24px;
 }
